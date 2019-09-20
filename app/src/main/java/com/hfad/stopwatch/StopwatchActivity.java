@@ -37,9 +37,9 @@ public class StopwatchActivity extends AppCompatActivity {
         final TextView timeView = (TextView) findViewById(R.id.time_view);
         final Handler handler = new Handler();
 
-        handler.post(new Runnable(){
+        handler.post(new Runnable() {
             @Override
-            public void Run() {
+            public void run() {
                 int hours = seconds / 3600;
                 int minutes = seconds % 60 / 60;
                 int secs = seconds % 60;
