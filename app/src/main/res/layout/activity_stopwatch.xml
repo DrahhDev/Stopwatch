@@ -8,7 +8,7 @@
     tools:context=".StopwatchActivity"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:pading="24dp"
+    android:padding="16dp"
     >
 
 
@@ -54,4 +54,4 @@
         android:text="@string/reset"
         />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
