@@ -11,15 +11,31 @@ import java.util.Locale;
 
 public class StopwatchActivity extends AppCompatActivity {
 
-    private int seconds;
+    private int seconds = 0;
     private boolean running;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stopwatch);
+        if (savedInstanceState != null) {
+            seconds = savedInstanceState.getInt("seconds");
+            running = savedInstanceState.getBoolean("running");
+        }
+        runTimer();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        running = false;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt("seconds", seconds);
+        savedInstanceState.putBoolean("running", running);
+    }
     public void onClickStart(View view) {
         running = true;
     }
@@ -41,9 +57,9 @@ public class StopwatchActivity extends AppCompatActivity {
             @Override
             public void run() {
                 int hours = seconds / 3600;
-                int minutes = seconds % 60 / 60;
+                int minutes = (seconds % 60) / 60;
                 int secs = seconds % 60;
-                String time = String.format(Locale.getDefault(),"%d, %02d, %02d", hours, minutes, secs);
+                String time = String.format(Locale.getDefault(),"%d: %02d: %02d", hours, minutes, secs);
 
                 timeView.setText(time);
                 if (running) {
